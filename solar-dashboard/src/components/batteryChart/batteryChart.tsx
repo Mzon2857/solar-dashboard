@@ -46,6 +46,7 @@ const data = [
 const BatteryChart = () => {
   return (
     <div className="batteryChart">
+      <h2>Battery Chart</h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
