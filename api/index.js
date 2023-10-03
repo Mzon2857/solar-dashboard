@@ -12,7 +12,7 @@ dotenv.config()
 const connect = async ()=>{
 try {
     await mongoose.connect(process.env.MONGO);
-    console.log("Connected to mongoDB")
+    console.log("Connected to mongoDB.")
   } catch (error) {
     throw error;
   }
@@ -31,7 +31,18 @@ app.use("/api/auth", authRoute);
 app.use("/api/solar", solarRoute);
 app.use("/api/users", usersRoute);
 
+app.use((err, req, res, next)=>{
+  const errorStatus = err.status || 500
+  const errorMessage = err.message || "ERROR"
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack
+  })
+})
+
 app.listen(8800, ()=>{
     connect()
-    console.log("connected to omg I LOVE NODEMON")
+    console.log("Connected to backend.")
 })
