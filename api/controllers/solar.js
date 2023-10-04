@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js";
+import jsonData from "../models/5GDataModel.js"
 
 export const createHotel = async (req, res, next)=>{
     const newHotel = new Hotel(req.body)
@@ -7,6 +8,18 @@ export const createHotel = async (req, res, next)=>{
         const savedHotel = await newHotel.save()
         res.status(200).json(savedHotel)
     }catch(err){
+        next(err)
+    }
+}
+
+export const uploadData = async (req, res, next) =>{
+    const inputData = req.body
+
+    try{
+        const newData = new jsonData(inputData)
+        const savedData = await newData.save()
+        res.status(200).json(savedData)
+    } catch(err){
         next(err)
     }
 }

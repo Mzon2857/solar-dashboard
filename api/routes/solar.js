@@ -1,9 +1,12 @@
 import express from "express";
 import { createError } from "../utils/error.js";
-import { createHotel, updateHotel, deleteHotel, getHotel, getAllHotel } from "../controllers/solar.js";
+import { createHotel, updateHotel, deleteHotel, getHotel, getAllHotel, uploadData } from "../controllers/solar.js";
 import {verifyAdmin} from "../utils/verifyToken.js"
 
 const router = express.Router();
+
+
+router.post("/uploadData", uploadData)
 
 //CREATE
 router.post("/", verifyAdmin, createHotel)
