@@ -5,7 +5,12 @@ import { menu } from "../../data.ts";
 
 const Menu = () => {
   return (
+  <div className="container">
     <div className="menu">
+      <div className="logo">
+        <img src={placeholder} alt=""/>
+        <span>AlgoDepot</span>
+      </div>
       {menu.map((item) => (
         <div className="item" key={item.id}>
           <span className="title">{item.title}</span>
@@ -18,6 +23,7 @@ const Menu = () => {
         </div>
       ))}
     </div>
+  </div>
   );
 };
 export default Menu;

@@ -1,21 +1,13 @@
+@import "../../styles/variables.scss";
+
 .navbar{
     width: 100%;
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .logo {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        gap: 10px;
-        img{
-        width: 20px;
-        height: auto;
-        }
-    }
-    
+    color: $dark-color;
+    // background-color: $soft-bg;
     .icons {
         display: flex;
         align-items: center;
