@@ -1,17 +1,18 @@
 import express from "express";
 import { createError } from "../utils/error.js";
 import { createHotel, updateHotel, deleteHotel, getHotel, getAllHotel } from "../controllers/solar.js";
+import {verifyAdmin} from "../utils/verifyToken.js"
 
 const router = express.Router();
 
 //CREATE
-router.post("/", createHotel)
+router.post("/", verifyAdmin, createHotel)
 
 //UPDATE
-router.put("/:id", updateHotel)
+router.put("/:id", verifyAdmin, updateHotel)
 
 //DELETE
-router.delete("/:id", deleteHotel)
+router.delete("/:id", verifyAdmin, deleteHotel)
 
 //GET
 router.get("/:id", getHotel)
