@@ -5,6 +5,7 @@ import Footer from "./components/footer/Footer.tsx";
 import Menu from "./components/menu/Menu.tsx";
 import Navbar from "./components/navbar/Navbar.tsx";
 import Login from "./pages/Login/login.tsx";
+import Logs from "./pages/Logs/Logs.tsx";
 
 import "./styles/global.scss"
 
@@ -45,6 +46,10 @@ function App() {
           path: "/placeholder",
           element: <Placeholder/>
         },
+        {
+          path: "/logs",
+          element: <Logs/>
+        }
       ]
     },
     {

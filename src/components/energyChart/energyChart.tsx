@@ -50,7 +50,10 @@ const EnergyChart = () => {
           <Tooltip />
           <Area type="monotone" dataKey="usage.hvac" stackId="1" stroke="#8884d8" fill="#8884d8" />
           <Area type="monotone" dataKey="usage.lighting" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-          <Area type="monotone" dataKey="usage.floor1" stackId="1" stroke="#ffc658" fill="#ffc658" />
+          <Area type="monotone" dataKey="usage.floor 1" stackId="1" stroke="#ffc658" fill="#ffc658" />
+          <Area type="monotone" dataKey="usage.floor 2" stackId="1" stroke="#D04122" fill="#D04122" />
+          <Area type="monotone" dataKey="usage.floor 3" stackId="1" stroke="#65D022" fill="#65D022" />
+          <Area type="monotone" dataKey="usage.floor 4" stackId="1" stroke="#8E22D0" fill="#8E22D0" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

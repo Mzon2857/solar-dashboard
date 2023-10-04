@@ -49,7 +49,7 @@ export const menu = [
             {
                 id:2,
                 title: "Logs",
-                url: "/placeholder",
+                url: "/logs",
                 icon: {placeholder},
             },
         ]
