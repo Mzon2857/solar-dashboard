@@ -1,4 +1,4 @@
-import {DataGrid, GridRowsProp, GridColDef} from "@mui/x-data-grid"
+import {DataGrid, GridRowsProp, GridColDef, GridToolbar} from "@mui/x-data-grid"
 import "./dataTable.scss";
 
 const DataTable = () => {
@@ -28,6 +28,13 @@ const DataTable = () => {
                 pageSize: 50,
             },
         },
+      }}
+      slots={{toolbar: GridToolbar}}
+      slotProps={{
+        toolbar:{
+            showQuickFilter: true,
+            quickFilterProps: {debounceMs:500}, 
+        }
       }}
       pageSizeOptions={[50]}
       checkboxSelection
