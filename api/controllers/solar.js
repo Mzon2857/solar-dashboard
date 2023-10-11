@@ -33,16 +33,37 @@ export const getData = async (req, res, next)=>{
         }
 
         const batteryCapacity = 20000;
-        const curBattery = 0;
+        let curBattery = 0;
         const newData = {
             data: data.map(entry =>{
                 const totalUsage = Object.values(entry.usage).reduce((acc, curr) => acc + curr, 0)
-                const solarUsage = Math.min(totalUsage, entry.dc_power);
-                const cityUsage = totalUsage - solarUsage;
+                let solarUsage = 0;
+                let batteryUsage = 0;
+                let cityUsage = 0;
+
+                // Use as much solar power as possible
+                if (entry.dc_power >= totalUsage) {
+                    solarUsage = totalUsage;
+                } else {
+                    solarUsage = entry.dc_power;
+
+                    // Calculate excess energy and store it in the battery
+                    const excessSolar = entry.dc_power - totalUsage;
+                    curBattery = Math.min(batteryCapacity, curBattery + excessSolar);
+                }
+
+                // Use the battery
+                batteryUsage = Math.min(curBattery, totalUsage - solarUsage);
+                curBattery -= batteryUsage;
+
+                // If there's still a deficit, use city power, but ensure it doesn't go negative
+                cityUsage = Math.max(totalUsage - solarUsage - batteryUsage, 0);
                 return {
                     DATE_TIME: entry.DATE_TIME,
                     SOLAR_USAGE: solarUsage,
-                    CITY_USAGE: cityUsage
+                    CITY_USAGE: cityUsage,
+                    BATTERY_USAGE: batteryUsage,
+                    remainingBattery: curBattery
                 }
             })
         }
