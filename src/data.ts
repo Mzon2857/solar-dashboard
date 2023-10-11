@@ -24,13 +24,13 @@ export const menu = [
         listItems:[
             {
                 id:1,
-                title: "p1",
+                title: "Usage",
                 url: "/placeholder",
                 icon: {placeholder},
             },
             {
                 id:2,
-                title: "p2",
+                title: "Alerts",
                 url: "/placeholder",
                 icon: {placeholder},
             },
@@ -48,7 +48,7 @@ export const menu = [
             },
             {
                 id:2,
-                title: "Logs",
+                title: "Devices",
                 url: "/logs",
                 icon: {placeholder},
             },
