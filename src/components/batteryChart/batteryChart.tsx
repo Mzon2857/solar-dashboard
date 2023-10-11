@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -12,38 +12,20 @@ import {
 
 import "./batteryChart.scss";
 
-const data = [
-  {
-    ID: "1",
-    percent: 40,
-  },
-  {
-    ID: "2",
-    percent: 15,
-  },
-  {
-    ID: "3",
-    percent: 20,
-  },
-  {
-    ID: "4",
-    percent: 45,
-  },
-  {
-    ID: "5",
-    percent: 70,
-  },
-  {
-    ID: "6",
-    percent: 85,
-  },
-  {
-    ID: "7",
-    percent: 69,
-  },
-];
-
 const BatteryChart = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(()=>{
+    fetch("http://localhost:8800/api/solar/6526ce98b3849ff59c57c311")
+      .then((response) => response.json())
+      .then((responseData)=>{
+        setData(responseData.data);
+      })
+      .catch((error)=>{
+        console.log("Error fetching data. ", error)
+      })
+  }, []);
+
   return (
     <div className="batteryChart">
       <h2>Battery Chart</h2>
@@ -66,7 +48,7 @@ const BatteryChart = () => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="percent"
+            dataKey="remainingBattery"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />

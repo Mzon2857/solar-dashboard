@@ -27,8 +27,6 @@ const EnergyChart = () => {
       })
   }, []);
 
-  console.log(data)
-
   return (
     <div className="energyChart">
       <h2>Energy Chart</h2>

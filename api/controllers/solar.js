@@ -32,7 +32,7 @@ export const getData = async (req, res, next)=>{
             throw new Error("Data is not an array");
         }
 
-        const batteryCapacity = 20000;
+        const batteryCapacity = 5000;
         let curBattery = 0;
         const newData = {
             data: data.map(entry =>{
@@ -44,12 +44,16 @@ export const getData = async (req, res, next)=>{
                 // Use as much solar power as possible
                 if (entry.dc_power >= totalUsage) {
                     solarUsage = totalUsage;
+
+                    // Calculate excess energy and store it in the battery, but ensure it doesn't exceed capacity
+                    const excessSolar = entry.dc_power - totalUsage;
+                    if (curBattery + excessSolar <= batteryCapacity) {
+                        curBattery += excessSolar;
+                    } else {
+                        curBattery = batteryCapacity;
+                    }
                 } else {
                     solarUsage = entry.dc_power;
-
-                    // Calculate excess energy and store it in the battery
-                    const excessSolar = entry.dc_power - totalUsage;
-                    curBattery = Math.min(batteryCapacity, curBattery + excessSolar);
                 }
 
                 // Use the battery
@@ -58,6 +62,7 @@ export const getData = async (req, res, next)=>{
 
                 // If there's still a deficit, use city power, but ensure it doesn't go negative
                 cityUsage = Math.max(totalUsage - solarUsage - batteryUsage, 0);
+
                 return {
                     DATE_TIME: entry.DATE_TIME,
                     SOLAR_USAGE: solarUsage,
