@@ -17,7 +17,7 @@ const EnergyChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:8800/api/solar/651d739a33de0cb9d0e3be3f")
+    fetch("http://localhost:8800/api/solar/6526ce98b3849ff59c57c311")
       .then((response) => response.json())
       .then((responseData)=>{
         setData(responseData.data);
@@ -48,12 +48,8 @@ const EnergyChart = () => {
           <XAxis dataKey="DATE_TIME" />
           <YAxis />
           <Tooltip />
-          <Area type="monotone" dataKey="usage.hvac" stackId="1" stroke="#8884d8" fill="#8884d8" />
-          <Area type="monotone" dataKey="usage.lighting" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-          <Area type="monotone" dataKey="usage.floor 1" stackId="1" stroke="#ffc658" fill="#ffc658" />
-          <Area type="monotone" dataKey="usage.floor 2" stackId="1" stroke="#D04122" fill="#D04122" />
-          <Area type="monotone" dataKey="usage.floor 3" stackId="1" stroke="#65D022" fill="#65D022" />
-          <Area type="monotone" dataKey="usage.floor 4" stackId="1" stroke="#8E22D0" fill="#8E22D0" />
+          <Area type="monotone" dataKey="SOLAR_USAGE" stackId="1" stroke="#8884d8" fill="#8884d8" />
+          <Area type="monotone" dataKey="CITY_USAGE" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
         </AreaChart>
       </ResponsiveContainer>
     </div>

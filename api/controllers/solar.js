@@ -26,8 +26,28 @@ export const uploadData = async (req, res, next) =>{
 
 export const getData = async (req, res, next)=>{
     try{
-        const data = await jsonData.findById(req.params.id)
-        res.status(200).json(data)
+        const document = await jsonData.findById(req.params.id)
+        const data = document.data
+        if (!Array.isArray(data)) {
+            throw new Error("Data is not an array");
+        }
+
+        const batteryCapacity = 20000;
+        const curBattery = 0;
+        const newData = {
+            data: data.map(entry =>{
+                const totalUsage = Object.values(entry.usage).reduce((acc, curr) => acc + curr, 0)
+                const solarUsage = Math.min(totalUsage, entry.dc_power);
+                const cityUsage = totalUsage - solarUsage;
+                return {
+                    DATE_TIME: entry.DATE_TIME,
+                    SOLAR_USAGE: solarUsage,
+                    CITY_USAGE: cityUsage
+                }
+            })
+        }
+
+        res.status(200).json(newData)
     }catch(err){
         next(err)
     }

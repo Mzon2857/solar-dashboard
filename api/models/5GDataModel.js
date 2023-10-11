@@ -14,7 +14,6 @@ const DataSchema = new mongoose.Schema({
             'floor 3': Number,
             'floor 4': Number,
           },
-          net_gain: Number,
         },
       ],
 });
